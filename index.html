@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple AI Chatbot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4e3c3;
+            color: #000000;
+            line-height: 1.6;
+            font-size: 16px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 40px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            flex-grow: 1;
+        }
+        h1, h2 {
+            font-family: 'Impact', sans-serif;
+            color: #ff4d00;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        h1 {
+            font-size: 32px;
+            border-bottom: 2px solid #ff4d00;
+            padding-bottom: 10px;
+        }
+        h2 {
+            font-size: 24px;
+            background-color: rgba(211, 211, 211, 0.3);
+            padding: 10px 20px;
+            position: relative;
+            margin-top: 20px;
+        }
+        h2::before {
+            content: '🤖';
+            position: absolute;
+            left: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        #chat-container {
+            border: 1px solid #d4c4a8;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+        #chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        #user-input {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        #message-input {
+            flex-grow: 1;
+            padding: 5px;
+            border: 1px solid #d4c4a8;
+            border-radius: 3px;
+        }
+        button {
+            background-color: #ff4d00;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin-left: 5px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        #api-key-input {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #d4c4a8;
+            border-radius: 3px;
+        }
+        .about {
+            background-color: #e3d5b6;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .about a {
+            color: #ff4d00;
+            text-decoration: none;
+        }
+        .about a:hover {
+            text-decoration: underline;
+        }
+        #console-output {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Simple AI Chatbot</h1>
+        <input type="password" id="api-key-input" placeholder="Enter your OpenAI API key">
+        <button id="test-api-key">Test API Key</button>
+        <div id="chat-container">
+            <div id="chat-messages"></div>
+            <div id="user-input">
+                <input type="text" id="message-input" placeholder="Type your message...">
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+        <div id="console-output"></div>
+        <div class="about">
+            <h2>How It Works</h2>
+            <p>This chatbot uses the OpenAI API to generate responses. Here's a brief overview of its components:</p>
+            <ul>
+                <li>HTML: Structures the page and chat interface</li>
+                <li>CSS: Styles the page for a user-friendly experience</li>
+                <li>JavaScript: Handles user input, API calls, and response rendering</li>
+                <li>API Integration: Connects to OpenAI for AI-powered responses</li>
+            </ul>
+            <p>To use this chatbot, enter your OpenAI API key in the input field above. The API key is not saved or stored anywhere.</p>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        const apiKeyInput = document.getElementById('api-key-input');
+        const testApiKeyButton = document.getElementById('test-api-key');
+        const consoleOutput = document.getElementById('console-output');
+
+        sendButton.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+        testApiKeyButton.addEventListener('click', testApiKey);
+
+        function log(message) {
+            console.log(message);
+            consoleOutput.textContent += message + '\n';
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        async function testApiKey() {
+            const apiKey = apiKeyInput.value.trim();
+            if (!apiKey) {
+                log('Please enter an API key.');
+                return;
+            }
+
+            log('Testing API key...');
+            try {
+                const response = await fetch('https://api.openai.com/v1/engines', {
+                    headers: {
+                        'Authorization': `Bearer ${apiKey}`
+                    }
+                });
+
+                if (response.ok) {
+                    log('API key is valid!');
+                } else {
+                    log('API key is invalid. Please check and try again.');
+                }
+            } catch (error) {
+                log(`Error testing API key: ${error.message}`);
+            }
+        }
+
+        async function sendMessage() {
+            const message = messageInput.value.trim();
+            const apiKey = apiKeyInput.value.trim();
+
+            if (!message) return;
+            if (!apiKey) {
+                log('Please enter an API key before sending a message.');
+                return;
+            }
+
+            addMessageToChat('User', message);
+            messageInput.value = '';
+
+            log('Sending message to OpenAI API...');
+            try {
+                const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-3.5-turbo",
+                        messages: [{role: "user", content: message}],
+                        max_tokens: 150
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const aiResponse = data.choices[0].message.content.trim();
+                log('Received response from OpenAI API');
+                addMessageToChat('AI', aiResponse);
+            } catch (error) {
+                log(`Error: ${error.message}`);
+                addMessageToChat('AI', 'Sorry, there was an error processing your request.');
+            }
+        }
+
+        function addMessageToChat(sender, message) {
+            const messageElement = document.createElement('div');
+            messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    </script>
+</body>
+</html>
