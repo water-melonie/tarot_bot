@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple AI Chatbot</title>
+    <title>Taro Card Reader</title>
     <style>
         * {
             margin: 0;
@@ -23,7 +23,7 @@
         .container {
             max-width: 800px;
             margin: auto;
-            background: white;
+            background: rgb(0, 0, 0);
             padding: 40px;
             border-radius: 5px;
             box-shadow: 0 0 15px rgba(0,0,0,0.1);
@@ -31,7 +31,7 @@
         }
         h1, h2 {
             font-family: 'Impact', sans-serif;
-            color: #ff4d00;
+            color: #00aaff;
             text-transform: uppercase;
             margin-bottom: 15px;
             letter-spacing: 1px;
@@ -120,27 +120,15 @@
 </head>
 <body>
     <div class="container">
-        <h1>Simple AI Chatbot</h1>
+        <h1>Taro Card Reader</h1>
         <input type="password" id="api-key-input" placeholder="Enter your OpenAI API key">
         <button id="test-api-key">Test API Key</button>
         <div id="chat-container">
             <div id="chat-messages"></div>
             <div id="user-input">
-                <input type="text" id="message-input" placeholder="Type your message...">
+                <input type="text" id="message-input" placeholder="Type your messages here ">
                 <button id="send-button">Send</button>
             </div>
-        </div>
-        <div id="console-output"></div>
-        <div class="about">
-            <h2>How It Works</h2>
-            <p>This chatbot uses the OpenAI API to generate responses. Here's a brief overview of its components:</p>
-            <ul>
-                <li>HTML: Structures the page and chat interface</li>
-                <li>CSS: Styles the page for a user-friendly experience</li>
-                <li>JavaScript: Handles user input, API calls, and response rendering</li>
-                <li>API Integration: Connects to OpenAI for AI-powered responses</li>
-            </ul>
-            <p>To use this chatbot, enter your OpenAI API key in the input field above. The API key is not saved or stored anywhere.</p>
         </div>
     </div>
 
