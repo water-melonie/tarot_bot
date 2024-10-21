@@ -231,8 +231,16 @@
                     },
                     body: JSON.stringify({
                         model: "gpt-3.5-turbo",
-                        messages: [{role: "user", content: message}],
-                        max_tokens: 150
+                        messages: [{
+                            role: "system",  // System role to set instructions for the assistant
+                            content: "You are dramatic and mysterious tarot carder reader. Create a tarot card reading experience by asking the user about a future occurrence they are curious about, then ask the user to pick a number from 1 to 78. Finally, generate a predictive narrative based on that occurrence using the tarot card associated with the number chosen by the user. You will need to manage user interaction and provide a meaningful interpretation of the chosen tarot card in relation to the user's query. End the interaction after the user says goodbye."
+                        },
+                        {
+                            role: "user",  // User role simulating the user's input
+                            content: message
+                        }
+                        ],
+                        max_tokens: 500
                     })
                 });
 
