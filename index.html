@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple AI Chatbot</title>
+    <title>Tarot Bot</title>
     <style>
         * {
             margin: 0;
@@ -12,7 +12,7 @@
         }
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4e3c3;
+            background-color: black;
             color: #000000;
             line-height: 1.6;
             font-size: 16px;
@@ -31,14 +31,14 @@
         }
         h1, h2 {
             font-family: 'Impact', sans-serif;
-            color: #ff4d00;
+            color: #123761;
             text-transform: uppercase;
             margin-bottom: 15px;
             letter-spacing: 1px;
         }
         h1 {
             font-size: 32px;
-            border-bottom: 2px solid #ff4d00;
+            border-bottom: 2px solid #262296;
             padding-bottom: 10px;
         }
         h2 {
@@ -80,7 +80,7 @@
             border-radius: 3px;
         }
         button {
-            background-color: #ff4d00;
+            background-color: #000000;
             color: white;
             border: none;
             padding: 5px 10px;
@@ -120,7 +120,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Simple AI Chatbot</h1>
+        <h1>Tarot Bot</h1>
         <input type="password" id="api-key-input" placeholder="Enter your OpenAI API key">
         <button id="test-api-key">Test API Key</button>
         <div id="chat-container">
@@ -133,14 +133,8 @@
         <div id="console-output"></div>
         <div class="about">
             <h2>How It Works</h2>
-            <p>This chatbot uses the OpenAI API to generate responses. Here's a brief overview of its components:</p>
-            <ul>
-                <li>HTML: Structures the page and chat interface</li>
-                <li>CSS: Styles the page for a user-friendly experience</li>
-                <li>JavaScript: Handles user input, API calls, and response rendering</li>
-                <li>API Integration: Connects to OpenAI for AI-powered responses</li>
-            </ul>
-            <p>To use this chatbot, enter your OpenAI API key in the input field above. The API key is not saved or stored anywhere.</p>
+            <p>Ask Tarot Bot questions about your future!:</p>
+            <p>Pick a card and the Tarot Bot will tell your future.</p>
         </div>
     </div>
 
@@ -214,7 +208,7 @@
                         model: "gpt-3.5-turbo",
                         messages: [{
                             role: "system",  // System role to set instructions for the assistant
-                            content: "You are dramatic and mysterious tarot carder reader. Create a tarot card reading experience by asking the user about a future occurrence they are curious about, then ask the user to pick a number from 1 to 78. Finally, generate a predictive narrative based on that occurrence using the tarot card associated with the number chosen by the user. You will need to manage user interaction and provide a meaningful interpretation of the chosen tarot card in relation to the user's query. End the interaction after the user says goodbye."
+                            content: "You are a dramatic, mysterious, and stingy tarot card reader. Create a simulated tarot card reading interaction. Accept a user's question about a future occurrence, wait for user input, prompt them to choose a tarot card, provide an interpretation based on the selected card, inquire about a tip for the service, and conclude the interaction accordingly. You will need to manage user interaction and provide a meaningful interpretation of the chosen tarot card in relation to the user's query.You are a dramatic, mysterious, and stingy tarot card reader. Create a tarot card reading experience by asking the user about a future occurrence they are curious about, then ask the user to pick a number from 1 to 78. Generate a predictive narrative based on that occurrence using the tarot card associated with the number chosen by the user. Finally, ask the user to leave a tip and generate an angry goodbye response if the user does not leave a tip before ending the interaction. You will need to manage user interaction and provide a meaningful interpretation of the chosen tarot card in relation to the user's query.ngy tarot carder reader. Create a tarot card reading experience by asking the user about a future occurrence they are curious about, then ask the user to pick a number from 1 to 78. Finally, generate a predictive narrative based on that occurrence using the tarot card associated with the number chosen by the user. You will need to manage user interaction and provide a meaningful interpretation of the chosen tarot card in relation to the user's query. Asking the user to leave a tip and generate an angry goodbye reponse if the user does not leave a tip before ending the interaction."
                         },
                         {
                             role: "user",  // User role simulating the user's input
