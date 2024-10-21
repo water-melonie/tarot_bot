@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taro Card Reader</title>
+    <link rel="icon" type="image/x-icon" href="star symbol.png">
+    <title>TarotBot</title>
     <style>
         * {
             margin: 0;
@@ -81,15 +82,8 @@
             position: relative;
             margin-top: 20px;
         }
-        h2::before {
-            content: '🤖';
-            position: absolute;
-            left: -25px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
         #chat-container {
-            border: 1px solid #d4c4a8;
+            border: 1px solid #ffffff;
             border-radius: 5px;
             margin-bottom: 20px;
             padding: 10px;
@@ -135,7 +129,7 @@
             margin-top: 20px;
         }
         .about a {
-            color: #ff4d00;
+            color: #104876;
             text-decoration: none;
         }
         .about a:hover {
@@ -153,21 +147,22 @@
 </head>
 <body>
     <div class="container">
-        <h1>Taro Card Reader</h1>
+        <h1>TarotBot</h1>
         <input type="password" id="api-key-input" placeholder="Enter your OpenAI API key">
         <button id="test-api-key">Test API Key</button>
         <div id="chat-container">
             <div id="chat-messages"></div>
             <div id="user-input">
-                <input type="text" id="message-input" placeholder="Type your messages here ">
+                <input type="text" id="message-input" placeholder="Ask your question here ">
                 <button id="send-button">Send</button>
             </div>
         </div>
         <div id="console-output"></div>
         <div class="about">
             <h2>How It Works</h2>
-            <p>Ask Tarot Bot questions about your future!:</p>
-            <p>Pick a card and the Tarot Bot will tell your future.</p>
+            <p>Ask Tarot Bot questions about your future 
+                <br>and TarotBot will generate a response 
+                <br>using the card you pick!</p>
         </div>
     </div>
 
