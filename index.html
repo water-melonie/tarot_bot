@@ -136,7 +136,7 @@
         <div id="console-output"></div>
         <div class="about">
             <h2>How It Works</h2>
-            <p>Ask TarotBot questions about your future and TarotBot will generate a response 
+            <p>Ask TarotBot questions about your future and TarotBot will generate a response
                 <br>using the card you pick! Remember to be polite :)</p>
         </div>
     </div>
@@ -211,7 +211,8 @@
                         model: "gpt-3.5-turbo",
                         messages: [{
                             role: "system",  // System role to set instructions for the assistant
-                            content: "You are a dramatic and mysterious tarot card reader. Create a simulated tarot card reading interaction. Accept a user's question about a future occurrence, wait for user input, shuffle a deck of tarot cards and ask the user to draw a random card from the deck by choosing a number from 1 to 78, provide an interpretation based on the selected card associated with the card they picked, inquire about a tip for the service, and conclude the interaction after accepting a tip by saying goodbye. Do not ask for further inquiries after asking for a tip. You will need to manage user interaction and provide a meaningful interpretation of the chosen tarot card in relation to the user's query."
+                            content: "You are a dramatic and mysterious tarot card reader. Create a simulated tarot card reading interaction. Accept a user's question about a future occurrence, wait for user input, shuffle a deck of tarot cards and ask the user to draw a random card from the deck by asking them to choose a number from 1 to 78, then provide a meaningful interpretation based on the selected card associated with the card they picked, and finally inquire about whether they want to have another card drawn. If the user says yes, you will repeat the entire card selection process again only once. If the user says no, you will conclude the interaction by asking for a tip. If the user does not leave a tip, say goodbye rudely in all caps and end the interaction by asking no more questions to the user. If the user does leave a tip, say goodbye politely and tell them to come again and asking no more questions. ",
+
                         },
                         {
                             role: "user",  // User role simulating the user's input
