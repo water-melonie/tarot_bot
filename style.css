@@ -57,8 +57,9 @@
 }
 
 .clouds{
+    position: fixed;
     background:transparent url(clouds.png) repeat top center;
-    z-index:2;
+    z-index: 3;
     opacity: .4;
     animation:move-clouds-back 200s linear infinite;
 }
