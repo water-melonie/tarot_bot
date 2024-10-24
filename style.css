@@ -11,7 +11,7 @@
     margin-right:auto;
     text-align: center;
 
-    /* Stryling the text and giving it gradiant */
+    /* Styling the text and giving it gradient */
     color:#ffffff;
     background: -webkit-linear-gradient(#eee, #333);
     -webkit-background-clip: text;

@@ -1,9 +1,10 @@
-<html>
-    <head>
-        <title>Twinkling Night Sky</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>TarotBot</title>
         <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
-        <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="star symbol.png">
     <title>TarotBot</title>
@@ -25,7 +26,7 @@
             flex-direction: column;
             display:block;
 
-        }
+            }
         .container {
             max-width: 800px;
             margin: auto;
@@ -114,15 +115,14 @@
             white-space: pre-wrap;
         }
     </style>
-    </head>
-    <body>
+</head>
+<body>
         <div class="stars"></div>
         <div class="twinkling"></div>
-       <div class="clouds"></div>
-       <div class="title">
+        <div class="title">
 
        </div>
-       <div class="container">
+    <div class="container">
         <h1>TarotBot</h1>
         <input type="password" id="api-key-input" placeholder="Enter your OpenAI API key">
         <button id="test-api-key">Test API Key</button>
@@ -136,8 +136,7 @@
         <div id="console-output"></div>
         <div class="about">
             <h2>How It Works</h2>
-            <p>Ask Tarot Bot questions about your future
-                <br>and TarotBot will generate a response
+            <p>Ask Tarot Bot questions about your future and TarotBot will generate a response 
                 <br>using the card you pick! Remember to be polite :)</p>
         </div>
     </div>
@@ -197,7 +196,7 @@
                 return;
             }
 
-            addMessageToChat('User', message);
+            addMessageToChat('You', message);
             messageInput.value = '';
 
             log('Sending message to OpenAI API...');
@@ -212,7 +211,7 @@
                         model: "gpt-3.5-turbo",
                         messages: [{
                             role: "system",  // System role to set instructions for the assistant
-                            content: "You are a dramatic, mysterious, and stingy tarot card reader. Create a simulated tarot card reading interaction. Accept a user's question about a future occurrence, wait for user input, prompt them to choose a tarot card, provide an interpretation based on the selected card, inquire about a tip for the service, and conclude the interaction accordingly. You will need to manage user interaction and provide a meaningful interpretation of the chosen tarot card in relation to the user's query.You are a dramatic, mysterious, and stingy tarot card reader. Create a tarot card reading experience by asking the user about a future occurrence they are curious about, then ask the user to pick a number from 1 to 78. Generate a predictive narrative based on that occurrence using the tarot card associated with the number chosen by the user. Finally, ask the user to leave a tip and generate an angry goodbye response if the user does not leave a tip before ending the interaction. You will need to manage user interaction and provide a meaningful interpretation of the chosen tarot card in relation to the user's query.ngy tarot carder reader. Create a tarot card reading experience by asking the user about a future occurrence they are curious about, then ask the user to pick a number from 1 to 78. Finally, generate a predictive narrative based on that occurrence using the tarot card associated with the number chosen by the user. You will need to manage user interaction and provide a meaningful interpretation of the chosen tarot card in relation to the user's query. Asking the user to leave a tip and generate an angry goodbye reponse if the user does not leave a tip before ending the interaction."
+                            content: "You are a dramatic and mysterious tarot card reader. Create a simulated tarot card reading interaction. Accept a user's question about a future occurrence, wait for user input, shuffle a deck of tarot cards and ask the user to draw a random card from the deck by choosing a number from 1 to 78, provide an interpretation based on the selected card associated with the card they picked, inquire about a tip for the service, and conclude the interaction after accepting a tip by saying goodbye. Do not ask for further inquiries after asking for a tip. You will need to manage user interaction and provide a meaningful interpretation of the chosen tarot card in relation to the user's query."
                         },
                         {
                             role: "user",  // User role simulating the user's input
@@ -230,10 +229,10 @@
                 const data = await response.json();
                 const aiResponse = data.choices[0].message.content.trim();
                 log('Received response from OpenAI API');
-                addMessageToChat('AI', aiResponse);
+                addMessageToChat('Tarotbot', aiResponse);
             } catch (error) {
                 log(`Error: ${error.message}`);
-                addMessageToChat('AI', 'Sorry, there was an error processing your request.');
+                addMessageToChat('Tarotbot', 'Sorry, there was an error processing your request.');
             }
         }
 
@@ -244,5 +243,5 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
     </script>
-    </body>
+</body>
 </html>
