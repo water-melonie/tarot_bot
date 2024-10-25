@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>TarotBot</title>
-        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="card icon.png">
     <title>TarotBot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="card icon.png">
     <style>
         * {
             margin: 0;
@@ -116,30 +115,45 @@
         }
     </style>
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
 <body>
-        <div class="stars"></div>
-        <div class="twinkling"></div>
-        <div class="title">
-
-       </div>
-    <div class="container">
-        <h1>TarotBot</h1>
-        <input type="password" id="api-key-input" placeholder="Enter your OpenAI API key">
-        <button id="test-api-key">Test API Key</button>
-        <div id="chat-container">
-            <div id="chat-messages"></div>
-            <div id="user-input">
-                <input type="text" id="message-input" placeholder="Ask your question here ">
-                <button id="send-button">Send</button>
-            </div>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    <div class="title"></div>
+    <div id="log-container"></div>
+<div class="container">
+    <h1>TarotBot</h1>
+    <div id="model-container"></div>
+    <div class = "api-content">
+    <input type="password" id="api-key-input" placeholder="Enter your OpenAI API key">
+    <button id="test-api-key">Test API Key</button>
+    </div
+    <div id="chat-container">
+        <div id="chat-messages"></div>
+        <div id="user-input">
+            <input type="text" id="message-input" placeholder="Ask your question here">
+            <button id="send-button">Send</button>
         </div>
-        <div id="console-output"></div>
+    </div>
+
+    <div id="console-output"></div>
+
+    <!-- New wrapper for the How It Works section -->
+    <div class="about-wrapper">
         <div class="about">
             <h2>How It Works</h2>
+
             <p>Ask TarotBot questions about your future and TarotBot will generate a response
                 <br>using the card you pick! Remember to be polite :)</p>
         </div>
+        <div class="other-info">
+            <p>Ask TarotBot questions about your future and TarotBot will generate a response 
+                using the card you pick! Remember to be polite :)</p>
     </div>
+</div>
+    </div>
+    <script src="app.js"></script>
 
     <script>
         const chatMessages = document.getElementById('chat-messages');

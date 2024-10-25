@@ -1,62 +1,275 @@
 
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 3;
 }
-.title h1{
-    font-size: 36px;
-    font-family: 'Lato', sans-serif;
-    margin-top:10em;
-    margin-left: auto;
-    margin-right:auto;
-    text-align: center;
+/** {
+  outline: 1px solid red; /* Temporarily outline everything 
+}*/
 
-    /* Styling the text and giving it gradient */
-    color:#ffffff;
-    background: -webkit-linear-gradient(#eee, #333);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 6px 6px 0px rgba(0,0,0,0.2);
-
-    /* Make sure text is infront of background images */
-    display:block;
-    position: relative;
-    z-index: 3;
+/* Layout for about section only */
+.about-wrapper {
+  bottom: 50px;
+  background-color: #000;
+  display:flex;
+  padding-top: 10%;
 }
+
+
+/* How It Works section */
+.about {
+  background-color: #000000;
+  padding: 15px;
+  border: none;
+  text-align: center;
+  align-content: center;
+  flex:content;
+  box-sizing: border-box; /* Ensures padding doesn't affect the width */
+  z-index: 100px;
+}
+/* Content next to How It Works section */
+.other-info {
+  background-color: #f8f3f32a;
+  color: #ffffffb1;
+  padding: 10px;
+  border-radius: 0px;
+  flex: 1; /* Makes it responsive */
+  text-align: center;
+  font-style: italic;
+  font-weight: 600;
+  border-radius: 20%;
+  right: 10%;
+  font-family: 'Rajdhani', sans-serif;
+  font-size:large;
+  z-index: 100000px;
+}
+
+/* Main container styling */
+.container {
+  max-width: 80%;
+  margin: auto;
+  background: rgb(0, 0, .5);
+  padding: 40px;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  flex-grow: 1;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+h1, h2 {
+  font-family: 'Rajdhani', sans-serif;
+  color: #00aaff;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+h1 {
+  font-size: 60px;
+  padding-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /* Adding a glow effect */
+  text-shadow: 0 0 8px #6f21ec,    /* Soft outer glow */
+  0 0 16px #6f21ec,   /* Larger soft glow */
+  0 0 24px #a25af9;   /* Even larger soft glow with a brighter color */
+}
+
+h2 {
+  font-size: 30px;
+  padding: 5px 5px;
+  margin-top: 5px;
+  text-shadow: 0 0 8px #6f21ec,    /* Soft outer glow */
+  0 0 16px #6f21ec,   /* Larger soft glow */
+  0 0 24px #a25af9;
+}
+
+
+#chat-container {
+  width: 100px;
+  height: 100px;
+  border: 1px transparent #000000;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  padding-top: 20px;
+}
+
+#model-container {
+  width: 00px;
+  height: 500px;
+  background-color: #000000;
+  border-radius: 0px;
+  position:absolute;
+  bottom: 240px;         /* Adjust the position as needed */
+  left: 40%;         /* Adjust the position as needed */
+  z-index: 10;         /* Set a higher z-index to ensure it's above other elements */
+  pointer-events: none; /* Make sure the container does not block clicks on underlying elements */
+}
+
+#chat-messages {
+  height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 15px;
+  border-color: #0400ff;
+  font-family: 'Rajdhani', sans-serif;
+  background-color: #282c49;
+  color: #fff;
+  font-size: 20px;
+  line-height: 40px;
+}
+#user-input {
+  display: flex;
+  margin-bottom: 10px;
+  font-family: 'Rajdhani', sans-serif;
+  text-align: right;
+}
+
+#message-input {
+  flex-grow: 1;
+  padding: 5px;
+  border: 1px solid #d4c4a8;
+  border-radius: 3px;
+  font-family: 'Rajdhani', sans-serif;
+  font-style: italic;
+  font-size: 20px;
+  text-align: left;
+  color: #ffff;
+  border: 2px solid #9812ffc8;
+  background-color:  #282c49;
+}
+
+.message {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  font-family: 'Rajdhani', sans-serif;
+  font-style: italic;
+}
+
+/* Tarot reader message aligned to the left */
+.tarot-reader {
+  align-self: flex-start;
+  background-color: #571ab1; /* Change color as needed */
+  border: 2px solid #9812ffc8;
+  text-align: left;
+}
+
+/* You message aligned to the right */
+.you {
+  align-self: flex-end;
+  background-color: #6f21ec; /* Change color as needed */
+  border: 2px solid #571ab1;
+  text-align: right;
+}
+
+button {
+  background-color: #571ab1;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+
+  /* Glow effect for the button */
+  box-shadow: 0 0 8px #571ab1, 0 0 16px #6f21ecaf, 0 0 24px #b08cf9e0;
+
+  /* Optional text glow */
+  text-shadow: 0 0 8px #ffffff9c, 0 0 16px #ffffffbf;
+}
+
+/*Add hover effect to intensify the glow */
+button:hover {
+  box-shadow: 0 0 12px #6f21ec, 0 0 24px #b18cf9, 0 0 36px #d6c7ff;
+}
+
+#test-api-key {
+  margin-bottom: 20px;
+  display: inline-flex;
+}
+#api-key-input {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #9812ffc8;
+  background-color: #282c49;
+  border-radius: 3px;
+  font-family: 'Rajdhani', sans-serif;
+  display: inline-flex;
+  font-size: 17px;
+}
+
+.api-content {
+  display: inline-flex;
+  align-items: space-evenly;
+}
+#console-output {
+  background-color: #ffffff00;
+  border: 1px solid #9812ffc8;
+  color: #ffffff8e;
+  font-size: 13px;
+  font-style: italic;
+  text-align: center;
+  padding: 40px;
+  top: 10%;
+  bottom: 10%;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  white-space: pre-line;
+  font-family: 'Rajdhani', sans-serif;
+  z-index: 11;
+}
+
 
 @keyframes move-twink-back {
-    from {background-position:0 0;}
-    to {background-position:-10000px 5000px;}
+  from {background-position:0 0;}
+  to {background-position:-10000px 5000px;}
 }
 
 @keyframes move-clouds-back {
-    from {background-position:0 0;}
-    to {background-position:10000px 0;}
+  from {background-position:0 0;}
+  to {background-position:10000px 0;}
 }
 
 .stars, .twinkling, .clouds {
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  width:100%;
-  height:100%;
-  display:block;
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+width:100%;
+height:100%;
+display:block;
 }
 
 .stars {
-  background:#000 url(stars.png) repeat top center;
-  z-index:0;
+background:#000000 url(images/stars.png) repeat top center;
+z-index:0;
 }
 
 .twinkling{
-  background:transparent url(twinkling.png) repeat top center;
-  z-index:1;
-  animation:move-twink-back 200s linear infinite;
+background:transparent url(images/twinkling.png) repeat top center;
+z-index:1;
+animation:move-twink-back 200s linear infinite;
 }
 
 .clouds{
+
+  background:transparent url(images/clouds.png) repeat top center;
+  z-index:2;
+  opacity: .4;
+  animation:move-clouds-back 200s linear infinite;
+}
+
     position: fixed;
     background:transparent url(clouds.png) repeat top center;
     z-index: 3;
