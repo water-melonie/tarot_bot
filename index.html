@@ -1,247 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>TarotBot</title>
-        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="card icon.png">
     <title>TarotBot</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            box-sizing: border-box;
-            position: relative;
-            z-index: 1;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            font-size: 16px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            display:block;
-
-            }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: rgb(0, 0, .5);
-            padding: 40px;
-            border-radius: 5px;
-            box-shadow: 0 0 15px rgba(0,0,0,0);
-            flex-grow: 1;
-        }
-        h1, h2 {
-            font-family: 'Impact', sans-serif;
-            color: #00aaff;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-        }
-        h1 {
-            font-size: 32px;
-            padding-bottom: 10px;
-        }
-        h2 {
-            font-size: 24px;
-            padding: 5px 5px;
-            position: relative;
-            margin-top: 5px;
-        }
-        #chat-container {
-            border: 1px solid #ffffff;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            padding: 10px;
-        }
-        #chat-messages {
-            height: 300px;
-            overflow-y: auto;
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-        }
-        #user-input {
-            display: flex;
-            margin-bottom: 10px;
-        }
-        #message-input {
-            flex-grow: 1;
-            padding: 5px;
-            border: 1px solid #d4c4a8;
-            border-radius: 3px;
-        }
-        button {
-            background-color: #00aaff;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            margin-left: 5px;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-        #api-key-input {
-            width: 100%;
-            padding: 5px;
-            margin-bottom: 10px;
-            border: 1px solid #ffffff;
-            border-radius: 3px;
-        }
-        .about {
-            background-color: #ffffff;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-        .about a {
-            color: #104876;
-            text-decoration: none;
-        }
-        .about a:hover {
-            text-decoration: underline;
-        }
-        #console-output {
-            background-color: #ffffff;
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-top: 20px;
-            font-family: monospace;
-            white-space: pre-wrap;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="card icon.png">
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
 <body>
-        <div class="stars"></div>
-        <div class="twinkling"></div>
-        <div class="title">
-
-       </div>
-    <div class="container">
-        <h1>TarotBot</h1>
-        <input type="password" id="api-key-input" placeholder="Enter your OpenAI API key">
-        <button id="test-api-key">Test API Key</button>
-        <div id="chat-container">
-            <div id="chat-messages"></div>
-            <div id="user-input">
-                <input type="text" id="message-input" placeholder="Ask your question here ">
-                <button id="send-button">Send</button>
-            </div>
-        </div>
-        <div id="console-output"></div>
-        <div class="about">
-            <h2>How It Works</h2>
-            <p>Ask TarotBot questions about your future and TarotBot will generate a response 
-                <br>using the card you pick! Remember to be polite :)</p>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    <div class="title"></div>
+    <div id="log-container"></div>
+<div class="container">
+    <h1>TarotBot</h1>
+    <div id="model-container"></div>
+    <div class = "api-content">
+    <input type="password" id="api-key-input" placeholder="Enter your OpenAI API key">
+    <button id="test-api-key">Test API Key</button>
+    </div
+    <div id="chat-container">
+        <div id="chat-messages"></div>
+        <div id="user-input">
+            <input type="text" id="message-input" placeholder="Ask your question here">
+            <button id="send-button">Send</button>
         </div>
     </div>
 
-    <script>
-        const chatMessages = document.getElementById('chat-messages');
-        const messageInput = document.getElementById('message-input');
-        const sendButton = document.getElementById('send-button');
-        const apiKeyInput = document.getElementById('api-key-input');
-        const testApiKeyButton = document.getElementById('test-api-key');
-        const consoleOutput = document.getElementById('console-output');
+    <div id="console-output"></div>
 
-        sendButton.addEventListener('click', sendMessage);
-        messageInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
-        });
-        testApiKeyButton.addEventListener('click', testApiKey);
-
-        function log(message) {
-            console.log(message);
-            consoleOutput.textContent += message + '\n';
-            consoleOutput.scrollTop = consoleOutput.scrollHeight;
-        }
-
-        async function testApiKey() {
-            const apiKey = apiKeyInput.value.trim();
-            if (!apiKey) {
-                log('Please enter an API key.');
-                return;
-            }
-
-            log('Testing API key...');
-            try {
-                const response = await fetch('https://api.openai.com/v1/engines', {
-                    headers: {
-                        'Authorization': `Bearer ${apiKey}`
-                    }
-                });
-
-                if (response.ok) {
-                    log('API key is valid!');
-                } else {
-                    log('API key is invalid. Please check and try again.');
-                }
-            } catch (error) {
-                log(`Error testing API key: ${error.message}`);
-            }
-        }
-
-        async function sendMessage() {
-            const message = messageInput.value.trim();
-            const apiKey = apiKeyInput.value.trim();
-
-            if (!message) return;
-            if (!apiKey) {
-                log('Please enter an API key before sending a message.');
-                return;
-            }
-
-            addMessageToChat('You', message);
-            messageInput.value = '';
-
-            log('Sending message to OpenAI API...');
-            try {
-                const response = await fetch('https://api.openai.com/v1/chat/completions', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${apiKey}`
-                    },
-                    body: JSON.stringify({
-                        model: "gpt-3.5-turbo",
-                        messages: [{
-                            role: "system",  // System role to set instructions for the assistant
-                            content: "You are a dramatic and mysterious tarot card reader. Create a simulated tarot card reading interaction. Accept a user's question about a future occurrence, wait for user input, shuffle a deck of tarot cards and ask the user to draw a random card from the deck by choosing a number from 1 to 78, provide an interpretation based on the selected card associated with the card they picked, inquire about a tip for the service, and conclude the interaction after accepting a tip by saying goodbye. Do not ask for further inquiries after asking for a tip. You will need to manage user interaction and provide a meaningful interpretation of the chosen tarot card in relation to the user's query."
-                        },
-                        {
-                            role: "user",  // User role simulating the user's input
-                            content: message
-                        }
-                        ],
-                        max_tokens: 500
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                const aiResponse = data.choices[0].message.content.trim();
-                log('Received response from OpenAI API');
-                addMessageToChat('TarotBot 🔮', aiResponse);
-            } catch (error) {
-                log(`Error: ${error.message}`);
-                addMessageToChat('TarotBot 🔮', 'Sorry, there was an error processing your request.');
-            }
-        }
-
-        function addMessageToChat(sender, message) {
-            const messageElement = document.createElement('div');
-            messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
-            chatMessages.appendChild(messageElement);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-    </script>
+    <!-- New wrapper for the How It Works section -->
+    <div class="about-wrapper">
+        <div class="about">
+            <h2>How It Works</h2>
+        </div>
+        <div class="other-info">
+            <p>Ask TarotBot questions about your future and TarotBot will generate a response 
+                using the card you pick! Remember to be polite :)</p>
+    </div>
+</div>
+    </div>
+    <script src="app.js"></script>
 </body>
 </html>
