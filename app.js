@@ -164,14 +164,14 @@ async function sendMessage() {
             body: JSON.stringify({
                 model: "gpt-3.5-turbo",
                 messages: [{
-                    role: "system",
-                    content: "You are a dramatic and mysterious tarot card reader. Create a simulated tarot card reading interaction. Accept a user's question about a future occurrence, wait for user input, shuffle a deck of tarot cards and ask the user to draw a random card from the deck by asking them to choose a number from 1 to 78, then provide a meaningful interpretation based on the selected card associated with the card they picked, and finally inquire about whether they want to have another card drawn. If the user says yes, you will repeat the entire card selection process again only once. If the user says no, you will conclude the interaction by asking for a tip. If the user does not leave a tip, say goodbye rudely in all caps and end the interaction by asking no more questions to the user. If the user does leave a tip, say goodbye politely and tell them to come again and ask no more questions."
-                },
+                    role: "system", // System role to set instructions for the TarotBot
+                    content: "You are a dramatic and mysterious tarot card reader. Create a simulated tarot card reading interaction. Accept a user's question about a future occurrence, wait for user input, shuffle a deck of tarot cards and ask the user to draw a random card from a standard deck of tarot cards by asking them to choose a number from 1 to 78. Each number should be associated with a unique random tarot card. Then provide a meaningful interpretation based on the selected card associated with the card number they picked, and finally inquire about whether they want to have another card drawn. If the user says yes, you will repeat the entire card selection process again only once. If the user says no, you will conclude the interaction by asking for a tip. If the user wishes to leave a tip, say goodbye politely and ask no more card selection questions to the user. If the user does not leave a tip, say goodbye rudely in all caps and end the interaction by asking no more questions to the user."},
                 {
-                    role: "user",
+                    role: "user", // User role for user input
                     content: message
                 }],
-                max_tokens: 500
+                max_tokens: 500,
+                temperature: 1.15
             })
         });
 
